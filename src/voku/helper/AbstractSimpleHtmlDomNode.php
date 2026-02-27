@@ -6,6 +6,13 @@ namespace voku\helper;
 
 /**
  * {@inheritdoc}
+ *
+ * @property-read int      $length
+ *                                    <p>The list items count.</p>
+ * @property-read string[] $outertext
+ *                                    <p>Get dom node's outer html.</p>
+ * @property-read string[] $plaintext
+ *                                    <p>Get dom node's plain text.</p>
  */
 abstract class AbstractSimpleHtmlDomNode extends \ArrayObject
 {

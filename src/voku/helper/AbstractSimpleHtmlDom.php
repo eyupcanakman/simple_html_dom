@@ -4,6 +4,34 @@ declare(strict_types=1);
 
 namespace voku\helper;
 
+/**
+ * @property string                $outertext
+ *                                     <p>Get dom node's outer html (alias for "outerHtml").</p>
+ * @property string                $outerhtml
+ *                                     <p>Get dom node's outer html.</p>
+ * @property string                $innertext
+ *                                     <p>Get dom node's inner html (alias for "innerHtml").</p>
+ * @property string                $innerhtml
+ *                                     <p>Get dom node's inner html.</p>
+ * @property string                $innerhtmlKeep
+ *                                     <p>Get dom node's inner html + keep fix for broken html.</p>
+ * @property string                $plaintext
+ *                                     <p>Get dom node's plain text.</p>
+ * @property string                $class
+ *                                     <p>Get dom node's class attribute.</p>
+ * @property string                $id
+ *                                     <p>Get dom node's id attribute.</p>
+ * @property SimpleHtmlAttributes  $classList
+ *                                     <p>Get dom node attributes.</p>
+ * @property-read string           $tag
+ *                                     <p>Get dom node name.</p>
+ * @property-read array<string, string>|null $attr
+ *                                     <p>Get dom node attributes.</p>
+ * @property-read string           $text
+ *                                     <p>Get dom node name.</p>
+ * @property-read string           $html
+ *                                     <p>Get dom node's outer html.</p>
+ */
 abstract class AbstractSimpleHtmlDom
 {
     /**
