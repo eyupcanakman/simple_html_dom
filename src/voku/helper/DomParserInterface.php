@@ -51,6 +51,15 @@ interface DomParserInterface
     public function findOneOrFalse(string $selector);
 
     /**
+     * Find one node with a CSS selector or null, if no element is found.
+     *
+     * @param string $selector
+     *
+     * @return mixed
+     */
+    public function findOneOrNull(string $selector);
+
+    /**
      * @param string $content
      * @param bool   $multiDecodeNewHtmlEntity
      * @param bool   $putBrokenReplacedBack

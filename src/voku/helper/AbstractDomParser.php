@@ -230,6 +230,15 @@ abstract class AbstractDomParser implements DomParserInterface
     abstract public function findOneOrFalse(string $selector);
 
     /**
+     * Find one node with a CSS selector or null, if no element is found.
+     *
+     * @param string $selector
+     *
+     * @return mixed
+     */
+    abstract public function findOneOrNull(string $selector);
+
+    /**
      * @return \DOMDocument
      */
     public function getDocument(): \DOMDocument

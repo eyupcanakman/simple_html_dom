@@ -630,4 +630,103 @@ final class SimpleHtmlDomTest extends \PHPUnit\Framework\TestCase
         $availabilityHtml = $document->findOne('.woocommerce-variation-availability');
         static::assertSame('<p class="stock in-stock">30 in stock</p>', $availabilityHtml->innerHtml());
     }
+
+    /**
+     * @see https://github.com/voku/simple_html_dom/issues/114
+     */
+    public function testTextExcludesStyleAndScriptContent()
+    {
+        $html = '<html><head><meta charset="utf-8"><style><!----></style></head><body>foobar</body></html>';
+        $document = new HtmlDomParser($html);
+        $body = $document->findOne('body');
+        static::assertSame('foobar', $body->text());
+    }
+
+    /**
+     * @see https://github.com/voku/simple_html_dom/issues/114
+     */
+    public function testTextExcludesScriptContent()
+    {
+        $html = '<div><script>var x = 1;</script>Hello World</div>';
+        $document = new HtmlDomParser($html);
+        $div = $document->findOne('div');
+        static::assertSame('Hello World', $div->text());
+    }
+
+    /**
+     * Verify that delete() on a nested element found via chained findOne()
+     * does not crash with a null parentNode error.
+     *
+     * @see https://github.com/voku/simple_html_dom/issues/88
+     */
+    public function testDeleteNestedElementDoesNotCrash()
+    {
+        $html = '<div class="outer"><div class="inner"><span>remove me</span></div></div>';
+        $document = new HtmlDomParser($html);
+        $outer = $document->findOne('.outer');
+        $span = $outer->findOne('span');
+        // Should not throw fatal error due to null parentNode
+        $span->delete();
+        // If we reach here, no crash occurred
+        static::assertSame('', $span->outertext);
+    }
+
+    /**
+     * @see https://github.com/voku/simple_html_dom/issues/89
+     */
+    public function testOuterhtmlReplacementWithPTagsDoesNotCrash()
+    {
+        $html = '<div><p>old content</p></div>';
+        $document = new HtmlDomParser($html);
+        $p = $document->findOne('p');
+        $p->outerhtml = '<p>new content</p>';
+        static::assertStringContainsString('new content', $document->html());
+    }
+
+    /**
+     * @see https://github.com/voku/simple_html_dom/issues/97
+     */
+    public function testRemoveMethodWorks()
+    {
+        $html = '<div><span class="target">remove me</span><span>keep me</span></div>';
+        $document = new HtmlDomParser($html);
+        $target = $document->findOne('.target');
+        $target->remove();
+        static::assertStringNotContainsString('remove me', $document->html());
+        static::assertStringContainsString('keep me', $document->html());
+    }
+
+    /**
+     * @see https://github.com/voku/simple_html_dom/issues/64
+     */
+    public function testFindOneOrNullReturnsNullWhenNotFound()
+    {
+        $html = '<div><span>hello</span></div>';
+        $document = new HtmlDomParser($html);
+        $result = $document->findOneOrNull('.missing');
+        static::assertNull($result);
+    }
+
+    /**
+     * @see https://github.com/voku/simple_html_dom/issues/64
+     */
+    public function testFindOneOrNullReturnsElementWhenFound()
+    {
+        $html = '<div><span class="target">hello</span></div>';
+        $document = new HtmlDomParser($html);
+        $result = $document->findOneOrNull('.target');
+        static::assertNotNull($result);
+        static::assertSame('hello', $result->text());
+    }
+
+    /**
+     * @see https://github.com/voku/simple_html_dom/issues/64
+     */
+    public function testFindOneOrNullWorksWithNullsafeOperator()
+    {
+        $html = '<div><span>hello</span></div>';
+        $document = new HtmlDomParser($html);
+        $result = $document->findOneOrNull('.missing')?->text();
+        static::assertNull($result);
+    }
 }

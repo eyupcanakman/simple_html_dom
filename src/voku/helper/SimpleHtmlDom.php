@@ -276,7 +276,9 @@ class SimpleHtmlDom extends AbstractSimpleHtmlDom implements \IteratorAggregate,
 
         $newNode = $ownerDocument->importNode($newDocument->getDocument()->documentElement, true);
 
-        $this->node->parentNode->replaceChild($newNode, $this->node);
+        if ($this->node->parentNode !== null) {
+            $this->node->parentNode->replaceChild($newNode, $this->node);
+        }
         $this->node = $newNode;
 
         // Remove head element, preserving child nodes. (again)
@@ -330,7 +332,9 @@ class SimpleHtmlDom extends AbstractSimpleHtmlDom implements \IteratorAggregate,
         if ($ownerDocument) {
             $newElement = $ownerDocument->createTextNode($string);
             $newNode = $ownerDocument->importNode($newElement, true);
-            $this->node->parentNode->replaceChild($newNode, $this->node);
+            if ($this->node->parentNode !== null) {
+                $this->node->parentNode->replaceChild($newNode, $this->node);
+            }
             $this->node = $newNode;
         }
 
@@ -373,7 +377,16 @@ class SimpleHtmlDom extends AbstractSimpleHtmlDom implements \IteratorAggregate,
      */
     public function text(): string
     {
-        return $this->getHtmlDomParser()->fixHtmlOutput($this->node->textContent);
+        $clone = $this->node->cloneNode(true);
+        if ($clone instanceof \DOMElement) {
+            foreach (['style', 'script'] as $tag) {
+                while (($el = $clone->getElementsByTagName($tag)->item(0)) !== null) {
+                    $el->parentNode->removeChild($el);
+                }
+            }
+        }
+
+        return $this->getHtmlDomParser()->fixHtmlOutput($clone->textContent);
     }
 
     /**
@@ -477,6 +490,18 @@ class SimpleHtmlDom extends AbstractSimpleHtmlDom implements \IteratorAggregate,
     public function findOneOrFalse(string $selector)
     {
         return $this->getHtmlDomParser()->findOneOrFalse($selector);
+    }
+
+    /**
+     * Find one node with a CSS selector or null, if no element is found.
+     *
+     * @param string $selector
+     *
+     * @return SimpleHtmlDomInterface|null
+     */
+    public function findOneOrNull(string $selector): ?SimpleHtmlDomInterface
+    {
+        return $this->getHtmlDomParser()->findOneOrNull($selector);
     }
 
     /**
@@ -1007,5 +1032,15 @@ class SimpleHtmlDom extends AbstractSimpleHtmlDom implements \IteratorAggregate,
     public function delete()
     {
         $this->outertext = '';
+    }
+
+    /**
+     * Remove this node from the DOM (alias for delete).
+     *
+     * @return void
+     */
+    public function remove()
+    {
+        $this->delete();
     }
 }

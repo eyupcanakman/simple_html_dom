@@ -430,6 +430,18 @@ class SimpleXmlDom extends AbstractSimpleXmlDom implements \IteratorAggregate, S
     }
 
     /**
+     * Find one node with a CSS or xPath selector or null, if no element is found.
+     *
+     * @param string $selector
+     *
+     * @return SimpleXmlDomInterface|null
+     */
+    public function findOneOrNull(string $selector): ?SimpleXmlDomInterface
+    {
+        return $this->getXmlDomParser()->findOneOrNull($selector);
+    }
+
+    /**
      * Returns the first child of node.
      *
      * @return SimpleXmlDomInterface|null

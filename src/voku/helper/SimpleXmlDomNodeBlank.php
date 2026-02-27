@@ -67,6 +67,16 @@ class SimpleXmlDomNodeBlank extends AbstractSimpleXmlDomNode implements SimpleXm
     }
 
     /**
+     * @param string $selector
+     *
+     * @return null
+     */
+    public function findOneOrNull(string $selector)
+    {
+        return null;
+    }
+
+    /**
      * @return string[]
      */
     public function innerHtml(): array

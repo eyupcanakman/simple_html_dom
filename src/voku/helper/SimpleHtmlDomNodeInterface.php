@@ -88,6 +88,15 @@ interface SimpleHtmlDomNodeInterface extends \IteratorAggregate
     public function findOneOrFalse(string $selector);
 
     /**
+     * Find one node with a CSS selector or null, if no element is found.
+     *
+     * @param string $selector
+     *
+     * @return SimpleHtmlDomNodeInterface|null
+     */
+    public function findOneOrNull(string $selector);
+
+    /**
      * Get html of elements.
      *
      * @return string[]

@@ -171,7 +171,7 @@ class HtmlDomParser extends AbstractDomParser
 
         // DOMDocument settings
         $this->document->preserveWhiteSpace = true;
-        $this->document->formatOutput = true;
+        $this->document->formatOutput = false;
 
         if ($element instanceof SimpleHtmlDomInterface) {
             $element = $element->getNode();
@@ -617,6 +617,24 @@ class HtmlDomParser extends AbstractDomParser
 
         if ($return instanceof SimpleHtmlDomBlank) {
             return false;
+        }
+
+        return $return;
+    }
+
+    /**
+     * Find one node with a CSS selector or null, if no element is found.
+     *
+     * @param string $selector
+     *
+     * @return SimpleHtmlDomInterface|null
+     */
+    public function findOneOrNull(string $selector): ?SimpleHtmlDomInterface
+    {
+        $return = $this->find($selector, 0);
+
+        if ($return instanceof SimpleHtmlDomBlank) {
+            return null;
         }
 
         return $return;

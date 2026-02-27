@@ -138,6 +138,15 @@ interface SimpleXmlDomInterface extends \IteratorAggregate
     public function findOneOrFalse(string $selector);
 
     /**
+     * Find one node with a CSS or xPath selector or null, if no element is found.
+     *
+     * @param string $selector
+     *
+     * @return SimpleXmlDomInterface|null
+     */
+    public function findOneOrNull(string $selector);
+
+    /**
      * Returns the first child of node.
      *
      * @return SimpleXmlDomInterface|null

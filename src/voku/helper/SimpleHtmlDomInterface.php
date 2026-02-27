@@ -153,6 +153,15 @@ interface SimpleHtmlDomInterface extends \IteratorAggregate
     public function findOneOrFalse(string $selector);
 
     /**
+     * Find one node with a CSS selector or null, if no element is found.
+     *
+     * @param string $selector
+     *
+     * @return SimpleHtmlDomInterface|null
+     */
+    public function findOneOrNull(string $selector);
+
+    /**
      * Returns the first child of node.
      *
      * @return SimpleHtmlDomInterface|null
@@ -388,4 +397,11 @@ interface SimpleHtmlDomInterface extends \IteratorAggregate
      * @return mixed
      */
     public function delete();
+
+    /**
+     * Remove this node from the DOM (alias for delete).
+     *
+     * @return void
+     */
+    public function remove();
 }

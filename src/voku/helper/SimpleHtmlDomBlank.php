@@ -258,6 +258,18 @@ class SimpleHtmlDomBlank extends AbstractSimpleHtmlDom implements \IteratorAggre
     }
 
     /**
+     * Find one node with a CSS selector or null, if no element is found.
+     *
+     * @param string $selector
+     *
+     * @return null
+     */
+    public function findOneOrNull(string $selector): ?SimpleHtmlDomInterface
+    {
+        return null;
+    }
+
+    /**
      * Returns the first child of node.
      *
      * @return null
@@ -467,6 +479,16 @@ class SimpleHtmlDomBlank extends AbstractSimpleHtmlDom implements \IteratorAggre
      */
     public function delete()
     {
-        $this->outertext='';
+        $this->outertext = '';
+    }
+
+    /**
+     * Remove this node from the DOM (alias for delete).
+     *
+     * @return void
+     */
+    public function remove()
+    {
+        $this->delete();
     }
 }

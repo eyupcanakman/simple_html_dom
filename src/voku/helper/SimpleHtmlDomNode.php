@@ -106,6 +106,20 @@ class SimpleHtmlDomNode extends AbstractSimpleHtmlDomNode implements SimpleHtmlD
     }
 
     /**
+     * Find one node with a CSS selector or null, if no element is found.
+     *
+     * @param string $selector
+     *
+     * @return SimpleHtmlDomNodeInterface<SimpleHtmlDomInterface>|null
+     */
+    public function findOneOrNull(string $selector)
+    {
+        $return = $this->find($selector, 0);
+
+        return $return ?? null;
+    }
+
+    /**
      * Get html of elements.
      *
      * @return string[]
