@@ -11,6 +11,11 @@ This is a maintained fork of [voku/simple_html_dom](https://github.com/voku/simp
 - Leading combinator selectors (`> span`, `+ div`, `~ p`) now work in `find()`
 - `@property` annotations on abstract classes for better static analysis (Psalm, PHPStan)
 - Minimum PHP version corrected to 7.1.0 (matches actual nullable type usage)
+- `findOneOrNull()` for PHP 8.0+ nullsafe operator support (`?->`)
+- `remove()` method (jQuery-style alias for `delete()`)
+- `text()` no longer includes `<style>` and `<script>` content
+- Fixed crash when calling `delete()` on detached/root nodes
+- HTML output no longer adds extra linebreaks not in the original
 
 ## Features
 
@@ -39,7 +44,11 @@ $dom = HtmlDomParser::file_get_html($file);
 $element = $dom->findOne('#css-selector');
 $elements = $dom->findMulti('.css-selector');
 $elementOrFalse = $dom->findOneOrFalse('#css-selector');
+$elementOrNull = $dom->findOneOrNull('#css-selector');
 $elementsOrFalse = $dom->findMultiOrFalse('.css-selector');
+
+// PHP 8.0+ nullsafe operator
+$text = $dom->findOneOrNull('.maybe-missing')?->text();
 ```
 
 ## Examples

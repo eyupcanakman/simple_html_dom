@@ -8,7 +8,8 @@
 </td><td><a href="#findmultiorfalsestring-selector-mixed">findMultiOrFalse</a>
 </td><td><a href="#findonestring-selector-static">findOne</a>
 </td></tr><tr><td><a href="#findoneorfalsestring-selector-mixed">findOneOrFalse</a>
-</td><td><a href="#fixhtmloutputstring-content-bool-multidecodenewhtmlentity-string">fixHtmlOutput</a>
+</td><td><a href="#findoneornullstring-selector-simplehtmldominterfacenull">findOneOrNull</a>
+</td></tr><tr><td><a href="#fixhtmloutputstring-content-bool-multidecodenewhtmlentity-string">fixHtmlOutput</a>
 </td><td><a href="#getdocument-domdocument">getDocument</a>
 </td><td><a href="#getelementbyclassstring-class-mixed">getElementByClass</a>
 </td></tr><tr><td><a href="#getelementbyidstring-id-mixed">getElementById</a>
@@ -34,7 +35,8 @@
 </td><td><a href="#findmultiorfalsestring-selector-falsesimplehtmldominterfacesimplehtmldomnodeinterfacesimplehtmldominterface">findMultiOrFalse</a>
 </td></tr><tr><td><a href="#findonestring-selector-simplehtmldomnodenull">findOne</a>
 </td><td><a href="#findoneorfalsestring-selector-falsesimplehtmldomnode">findOneOrFalse</a>
-</td><td><a href="#innerhtml-string">innerHtml</a>
+</td><td><a href="#findoneornullstring-selector-simplehtmldomnodenull">findOneOrNull</a>
+</td></tr><tr><td><a href="#innerhtml-string">innerHtml</a>
 </td><td><a href="#innertext-string">innertext</a>
 </td></tr><tr><td><a href="#outertext-string">outertext</a>
 </td><td><a href="#text-string">text</a>
@@ -49,7 +51,8 @@
 </td></tr><tr><td><a href="#findmultiorfalsestring-selector-falsesimplehtmldominterfacesimplehtmldomnodeinterfacesimplehtmldominterface">findMultiOrFalse</a>
 </td><td><a href="#findonestring-selector-simplehtmldominterface">findOne</a>
 </td><td><a href="#findoneorfalsestring-selector-falsesimplehtmldominterface">findOneOrFalse</a>
-</td><td><a href="#firstchild-simplehtmldominterfacenull">firstChild</a>
+</td><td><a href="#findoneornullstring-selector-simplehtmldominterfacenull">findOneOrNull</a>
+</td></tr><tr><td><a href="#firstchild-simplehtmldominterfacenull">firstChild</a>
 </td></tr><tr><td><a href="#getallattributes-stringnull">getAllAttributes</a>
 </td><td><a href="#getattributestring-name-string">getAttribute</a>
 </td><td><a href="#getelementbyclassstring-class-simplehtmldominterfacesimplehtmldomnodeinterfacesimplehtmldominterface">getElementByClass</a>
@@ -72,6 +75,7 @@
 </td><td><a href="#parentnode-simplehtmldominterface">parentNode</a>
 </td></tr><tr><td><a href="#previousnonwhitespacesibling-simplehtmldominterfacenull">previousNonWhitespaceSibling</a>
 </td><td><a href="#previoussibling-simplehtmldominterfacenull">previousSibling</a>
+</td><td><a href="#remove-mixed">remove</a>
 </td><td><a href="#removeattributestring-name-simplehtmldominterface">removeAttribute</a>
 </td><td><a href="#removeattributes-simplehtmldominterface">removeAttributes</a>
 </td></tr><tr><td><a href="#setattributestring-name-stringnull-value-bool-strictemptyvaluecheck-simplehtmldominterface">setAttribute</a>
@@ -139,6 +143,18 @@ Find one node with a CSS selector or false, if no element is found.
 
 **Return:**
 - `mixed`
+
+--------
+
+## findOneOrNull(string $selector): SimpleHtmlDomInterface|null
+<a href="#voku-php-readme-class-methods">↑</a>
+Find one node with a CSS selector or null, if no element is found. Useful with PHP 8.0+ nullsafe operator (`?->`).
+
+**Parameters:**
+- `string $selector`
+
+**Return:**
+- `\SimpleHtmlDomInterface|null`
 
 --------
 
@@ -416,6 +432,18 @@ Find one node with a CSS selector or false, if no element is found.
 
 --------
 
+## findOneOrNull(string $selector): SimpleHtmlDomNode|null
+<a href="#voku-php-readme-class-methods">↑</a>
+Find one node with a CSS selector or null, if no element is found.
+
+**Parameters:**
+- `string $selector`
+
+**Return:**
+- `\SimpleHtmlDomNode|null`
+
+--------
+
 ## innerHtml(): string[]
 <a href="#voku-php-readme-class-methods">↑</a>
 Get html of elements.
@@ -479,7 +507,19 @@ Returns children of node.
 
 ## delete(): mixed
 <a href="#voku-php-readme-class-methods">↑</a>
-Delete
+Delete the current node from the DOM.
+
+**Parameters:**
+__nothing__
+
+**Return:**
+- `mixed`
+
+--------
+
+## remove(): mixed
+<a href="#voku-php-readme-class-methods">↑</a>
+Remove the current node from the DOM. Alias for `delete()`.
 
 **Parameters:**
 __nothing__
@@ -547,6 +587,18 @@ Find one node with a CSS selector or false, if no element is found.
 
 **Return:**
 - `false|\SimpleHtmlDomInterface`
+
+--------
+
+## findOneOrNull(string $selector): SimpleHtmlDomInterface|null
+<a href="#voku-php-readme-class-methods">↑</a>
+Find one node with a CSS selector or null, if no element is found. Useful with PHP 8.0+ nullsafe operator (`?->`).
+
+**Parameters:**
+- `string $selector`
+
+**Return:**
+- `\SimpleHtmlDomInterface|null`
 
 --------
 
