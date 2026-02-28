@@ -1103,8 +1103,11 @@ class HtmlDomParser extends AbstractDomParser
     protected function keepSpecialSvgTags(string &$html)
     {
         // regEx for e.g.: [mask-image:url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">...</svg>')]
+        // Note: \1? makes the backreference optional so unquoted URLs also match
+        // when no quote delimiter is present.
+        // @see https://github.com/voku/simple_html_dom/issues/87
         /** @noinspection HtmlDeprecatedTag */
-        $regExSpecialSvg = '/\((["\'])?(?<start>data:image\/svg.*)<svg(?<attr>[^>]*?)>(?<content>.*)<\/svg>\1\)/isU';
+        $regExSpecialSvg = '/\((["\'])?(?<start>data:image\/svg.*)<svg(?<attr>[^>]*?)>(?<content>.*)<\/svg>\1?\)/isU';
         $htmlTmp = \preg_replace_callback(
             $regExSpecialSvg,
             static function ($svgs) {

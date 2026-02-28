@@ -46,6 +46,23 @@ class SelectorConverter
             return $selector;
         }
 
+        // Handle compound selectors ending with " text" or " comment"
+        // e.g. "div text" → XPath for div + //text()
+        // e.g. "div > text" → XPath for div + /text()
+        if (\preg_match('/^(.+?)\s*(>)?\s+(text|comment)$/', $selector, $m)) {
+            $parentSelector = $m[1];
+            $isDirect = ($m[2] === '>');
+            $nodeType = $m[3]; // 'text' or 'comment'
+
+            $parentXPath = self::toXPath($parentSelector, $ignoreCssSelectorErrors, $isForHtml);
+            $suffix = $isDirect ? "/{$nodeType}()" : "//{$nodeType}()";
+
+            $xPathQuery = $parentXPath . $suffix;
+            self::$compiled[$selector] = $xPathQuery;
+
+            return $xPathQuery;
+        }
+
         // Handle selectors starting with a combinator (> child, + adjacent, ~ sibling)
         $trimmedSelector = \ltrim($selector);
         if (isset($trimmedSelector[0]) && \in_array($trimmedSelector[0], ['>', '+', '~'], true)) {
