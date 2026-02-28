@@ -9,17 +9,17 @@ abstract class AbstractDomParser implements DomParserInterface
     /**
      * @var string
      */
-    protected static $domHtmlWrapperHelper = '____simple_html_dom__voku__html_wrapper____';
+    protected static $domHtmlWrapperHelper = '____simple_html_dom__shd__html_wrapper____';
 
     /**
      * @var string
      */
-    protected static $domHtmlBrokenHtmlHelper = '____simple_html_dom__voku__broken_html____';
+    protected static $domHtmlBrokenHtmlHelper = '____simple_html_dom__shd__broken_html____';
 
     /**
      * @var string
      */
-    protected static $domHtmlSpecialScriptHelper = '____simple_html_dom__voku__html_special_script____';
+    protected static $domHtmlSpecialScriptHelper = '____simple_html_dom__shd__html_special_script____';
 
     /**
      * @var array
@@ -32,10 +32,10 @@ abstract class AbstractDomParser implements DomParserInterface
     protected static $domLinkReplaceHelper = [
         'orig' => ['[', ']', '{', '}'],
         'tmp'  => [
-            '____SIMPLE_HTML_DOM__VOKU__SQUARE_BRACKET_LEFT____',
-            '____SIMPLE_HTML_DOM__VOKU__SQUARE_BRACKET_RIGHT____',
-            '____SIMPLE_HTML_DOM__VOKU__BRACKET_LEFT____',
-            '____SIMPLE_HTML_DOM__VOKU__BRACKET_RIGHT____',
+            '____SIMPLE_HTML_DOM__SHD__SQUARE_BRACKET_LEFT____',
+            '____SIMPLE_HTML_DOM__SHD__SQUARE_BRACKET_RIGHT____',
+            '____SIMPLE_HTML_DOM__SHD__BRACKET_LEFT____',
+            '____SIMPLE_HTML_DOM__SHD__BRACKET_RIGHT____',
         ],
     ];
 
@@ -45,12 +45,12 @@ abstract class AbstractDomParser implements DomParserInterface
     protected static $domReplaceHelper = [
         'orig' => ['&', '|', '+', '%', '@', '<html ⚡'],
         'tmp'  => [
-            '____SIMPLE_HTML_DOM__VOKU__AMP____',
-            '____SIMPLE_HTML_DOM__VOKU__PIPE____',
-            '____SIMPLE_HTML_DOM__VOKU__PLUS____',
-            '____SIMPLE_HTML_DOM__VOKU__PERCENT____',
-            '____SIMPLE_HTML_DOM__VOKU__AT____',
-            '<html ____SIMPLE_HTML_DOM__VOKU__GOOGLE_AMP____="true"',
+            '____SIMPLE_HTML_DOM__SHD__AMP____',
+            '____SIMPLE_HTML_DOM__SHD__PIPE____',
+            '____SIMPLE_HTML_DOM__SHD__PLUS____',
+            '____SIMPLE_HTML_DOM__SHD__PERCENT____',
+            '____SIMPLE_HTML_DOM__SHD__AT____',
+            '<html ____SIMPLE_HTML_DOM__SHD__GOOGLE_AMP____="true"',
         ],
     ];
 

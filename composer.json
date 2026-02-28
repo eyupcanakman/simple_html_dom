@@ -6,7 +6,7 @@
         "php dom",
         "HTML parser"
     ],
-    "homepage": "https://github.com/voku/simple_html_dom",
+    "homepage": "https://github.com/eyupcanakman/simple_html_dom",
     "license": "MIT",
     "type": "library",
     "authors": [

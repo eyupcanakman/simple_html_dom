@@ -1708,13 +1708,13 @@ ___;
             // non url && non dom special chars -> no changes
             '{{foo}}' => '{{foo}}',
             // dom special chars -> changes
-            '`?/=()=$&,|,+,%"?#![{@`' => '`?/=()=$____SIMPLE_HTML_DOM__VOKU__AMP____,____SIMPLE_HTML_DOM__VOKU__PIPE____,____SIMPLE_HTML_DOM__VOKU__PLUS____,____SIMPLE_HTML_DOM__VOKU__PERCENT____"?#![{____SIMPLE_HTML_DOM__VOKU__AT____`',
+            '`?/=()=$&,|,+,%"?#![{@`' => '`?/=()=$____SIMPLE_HTML_DOM__SHD__AMP____,____SIMPLE_HTML_DOM__SHD__PIPE____,____SIMPLE_HTML_DOM__SHD__PLUS____,____SIMPLE_HTML_DOM__SHD__PERCENT____"?#![{____SIMPLE_HTML_DOM__SHD__AT____`',
             // non url && non dom special chars -> no changes
-            'www.domain.de/foo.php?foobar=1&email=lars%40moelleken.org&guid=test1233312&{{foo}}' => 'www.domain.de/foo.php?foobar=1____SIMPLE_HTML_DOM__VOKU__AMP____email=lars____SIMPLE_HTML_DOM__VOKU__PERCENT____40moelleken.org____SIMPLE_HTML_DOM__VOKU__AMP____guid=test1233312____SIMPLE_HTML_DOM__VOKU__AMP____{{foo}}',
+            'www.domain.de/foo.php?foobar=1&email=lars%40moelleken.org&guid=test1233312&{{foo}}' => 'www.domain.de/foo.php?foobar=1____SIMPLE_HTML_DOM__SHD__AMP____email=lars____SIMPLE_HTML_DOM__SHD__PERCENT____40moelleken.org____SIMPLE_HTML_DOM__SHD__AMP____guid=test1233312____SIMPLE_HTML_DOM__SHD__AMP____{{foo}}',
             // url -> changes
-            '[https://www.domain.de/foo.php?foobar=1&email=lars%40moelleken.org&guid=test1233312&{{foo}}#bar]' => '____SIMPLE_HTML_DOM__VOKU__SQUARE_BRACKET_LEFT____https://www.domain.de/foo.php?foobar=1____SIMPLE_HTML_DOM__VOKU__AMP____email=lars____SIMPLE_HTML_DOM__VOKU__PERCENT____40moelleken.org____SIMPLE_HTML_DOM__VOKU__AMP____guid=test1233312____SIMPLE_HTML_DOM__VOKU__AMP________SIMPLE_HTML_DOM__VOKU__BRACKET_LEFT________SIMPLE_HTML_DOM__VOKU__BRACKET_LEFT____foo____SIMPLE_HTML_DOM__VOKU__BRACKET_RIGHT________SIMPLE_HTML_DOM__VOKU__BRACKET_RIGHT____#bar____SIMPLE_HTML_DOM__VOKU__SQUARE_BRACKET_RIGHT____',
+            '[https://www.domain.de/foo.php?foobar=1&email=lars%40moelleken.org&guid=test1233312&{{foo}}#bar]' => '____SIMPLE_HTML_DOM__SHD__SQUARE_BRACKET_LEFT____https://www.domain.de/foo.php?foobar=1____SIMPLE_HTML_DOM__SHD__AMP____email=lars____SIMPLE_HTML_DOM__SHD__PERCENT____40moelleken.org____SIMPLE_HTML_DOM__SHD__AMP____guid=test1233312____SIMPLE_HTML_DOM__SHD__AMP________SIMPLE_HTML_DOM__SHD__BRACKET_LEFT________SIMPLE_HTML_DOM__SHD__BRACKET_LEFT____foo____SIMPLE_HTML_DOM__SHD__BRACKET_RIGHT________SIMPLE_HTML_DOM__SHD__BRACKET_RIGHT____#bar____SIMPLE_HTML_DOM__SHD__SQUARE_BRACKET_RIGHT____',
             // url -> changes
-            'https://www.domain.de/foo.php?foobar=1&email=lars%40moelleken.org&guid=test1233312&{{foo}}#foo' => 'https://www.domain.de/foo.php?foobar=1____SIMPLE_HTML_DOM__VOKU__AMP____email=lars____SIMPLE_HTML_DOM__VOKU__PERCENT____40moelleken.org____SIMPLE_HTML_DOM__VOKU__AMP____guid=test1233312____SIMPLE_HTML_DOM__VOKU__AMP________SIMPLE_HTML_DOM__VOKU__BRACKET_LEFT________SIMPLE_HTML_DOM__VOKU__BRACKET_LEFT____foo____SIMPLE_HTML_DOM__VOKU__BRACKET_RIGHT________SIMPLE_HTML_DOM__VOKU__BRACKET_RIGHT____#foo',
+            'https://www.domain.de/foo.php?foobar=1&email=lars%40moelleken.org&guid=test1233312&{{foo}}#foo' => 'https://www.domain.de/foo.php?foobar=1____SIMPLE_HTML_DOM__SHD__AMP____email=lars____SIMPLE_HTML_DOM__SHD__PERCENT____40moelleken.org____SIMPLE_HTML_DOM__SHD__AMP____guid=test1233312____SIMPLE_HTML_DOM__SHD__AMP________SIMPLE_HTML_DOM__SHD__BRACKET_LEFT________SIMPLE_HTML_DOM__SHD__BRACKET_LEFT____foo____SIMPLE_HTML_DOM__SHD__BRACKET_RIGHT________SIMPLE_HTML_DOM__SHD__BRACKET_RIGHT____#foo',
         ];
 
         foreach ($tests as $test => $expected) {
@@ -2615,9 +2615,6 @@ ___;
         static::assertSame($htmlExpected, $htmlResult);
     }
 
-    /**
-     * @see https://github.com/voku/simple_html_dom/issues/96
-     */
     public function testNoExtraLinebreaksInOutput()
     {
         $html = '<div><span>foo</span><span>bar</span></div>';

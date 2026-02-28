@@ -6,7 +6,6 @@ use eyupcanakman\SimpleHtmlDom\HtmlDomParser;
 /**
  * Tests for SVG data URL preservation inside <style> tags.
  *
- * @see https://github.com/voku/simple_html_dom/issues/87
  *
  * @internal
  */

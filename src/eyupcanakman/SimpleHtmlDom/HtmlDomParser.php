@@ -1056,9 +1056,9 @@ class HtmlDomParser extends AbstractDomParser
                 '/(?<start>.*)<(?<element_start>[a-z]+)(?<element_start_addon> [^>]*)?>(?<value>.*?)<\/(?<element_end>\2)>(?<end>.*)/sui',
                 static function ($matches) {
                     return $matches['start'] .
-                        '°lt_simple_html_dom__voku_°' . $matches['element_start'] . $matches['element_start_addon'] . '°gt_simple_html_dom__voku_°' .
+                        '°lt_simple_html_dom__shd_°' . $matches['element_start'] . $matches['element_start_addon'] . '°gt_simple_html_dom__shd_°' .
                         $matches['value'] .
-                        '°lt/_simple_html_dom__voku_°' . $matches['element_end'] . '°gt_simple_html_dom__voku_°' .
+                        '°lt/_simple_html_dom__shd_°' . $matches['element_end'] . '°gt_simple_html_dom__shd_°' .
                         $matches['end'];
                 },
                 $html
@@ -1072,7 +1072,7 @@ class HtmlDomParser extends AbstractDomParser
                 '/(?<start>[^<]*)?(?<broken>(?:<\/\w+(?:\s+\w+=\"[^"]+\")*+[^<]+>)+)(?<end>.*)/u',
                 static function ($matches) {
                     $matches['broken'] = \str_replace(
-                        ['°lt/_simple_html_dom__voku_°', '°lt_simple_html_dom__voku_°', '°gt_simple_html_dom__voku_°'],
+                        ['°lt/_simple_html_dom__shd_°', '°lt_simple_html_dom__shd_°', '°gt_simple_html_dom__shd_°'],
                         ['</', '<', '>'],
                         $matches['broken']
                     );
@@ -1087,7 +1087,7 @@ class HtmlDomParser extends AbstractDomParser
         } while ($original !== $html);
 
         return \str_replace(
-            ['°lt/_simple_html_dom__voku_°', '°lt_simple_html_dom__voku_°', '°gt_simple_html_dom__voku_°'],
+            ['°lt/_simple_html_dom__shd_°', '°lt_simple_html_dom__shd_°', '°gt_simple_html_dom__shd_°'],
             ['</', '<', '>'],
             $html
         );
@@ -1105,7 +1105,6 @@ class HtmlDomParser extends AbstractDomParser
         // regEx for e.g.: [mask-image:url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">...</svg>')]
         // Note: \1? makes the backreference optional so unquoted URLs also match
         // when no quote delimiter is present.
-        // @see https://github.com/voku/simple_html_dom/issues/87
         /** @noinspection HtmlDeprecatedTag */
         $regExSpecialSvg = '/\((["\'])?(?<start>data:image\/svg.*)<svg(?<attr>[^>]*?)>(?<content>.*)<\/svg>\1?\)/isU';
         $htmlTmp = \preg_replace_callback(

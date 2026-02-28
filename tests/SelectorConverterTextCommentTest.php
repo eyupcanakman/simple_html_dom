@@ -7,7 +7,6 @@ use eyupcanakman\SimpleHtmlDom\SelectorConverter;
 /**
  * Tests for compound selectors ending with text/comment pseudo-selectors.
  *
- * @see https://github.com/voku/simple_html_dom/issues/62
  *
  * @internal
  */

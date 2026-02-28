@@ -8,7 +8,7 @@ function scraping_imdb($url)
     $return = [];
 
     // create HTML DOM
-    $dom = \voku\helper\HtmlDomParser::file_get_html($url);
+    $dom = \eyupcanakman\SimpleHtmlDom\HtmlDomParser::file_get_html($url);
 
     // get title
     $return['Title'] = $dom->find('title', 0)->innertext;

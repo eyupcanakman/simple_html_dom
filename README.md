@@ -2,7 +2,7 @@
 
 A HTML DOM parser written in PHP - let you manipulate HTML in a very easy way!
 
-This is a maintained fork of [voku/simple_html_dom](https://github.com/voku/simple_html_dom), which is itself a fork of [PHP Simple HTML DOM Parser](http://simplehtmldom.sourceforge.net/). Instead of string manipulation, it uses DOMDocument and modern PHP classes like Symfony CssSelector.
+A modern fork of [PHP Simple HTML DOM Parser](http://simplehtmldom.sourceforge.net/). Instead of string manipulation, it uses DOMDocument and modern PHP classes like Symfony CssSelector.
 
 ## What's different in this fork
 
@@ -16,6 +16,8 @@ This is a maintained fork of [voku/simple_html_dom](https://github.com/voku/simp
 - `text()` no longer includes `<style>` and `<script>` content
 - Fixed crash when calling `delete()` on detached/root nodes
 - HTML output no longer adds extra linebreaks not in the original
+- Compound `text` / `comment` selectors: `find('div text')`, `find('p > text')`, `find('div comment')`
+- SVG data URLs inside `<style>` tags no longer break parsing (unquoted `url()` fix)
 
 ## Features
 
@@ -35,7 +37,7 @@ composer require eyupcanakman/simple-html-dom
 ## Quick Start
 
 ```php
-use voku\helper\HtmlDomParser;
+use eyupcanakman\SimpleHtmlDom\HtmlDomParser;
 
 $dom = HtmlDomParser::str_get_html($str);
 // or
@@ -49,6 +51,11 @@ $elementsOrFalse = $dom->findMultiOrFalse('.css-selector');
 
 // PHP 8.0+ nullsafe operator
 $text = $dom->findOneOrNull('.maybe-missing')?->text();
+
+// Find text nodes inside an element
+$textNodes = $dom->find('div text');        // all descendant text nodes
+$directText = $dom->find('p > text');       // direct child text nodes only
+$comments = $dom->find('div comment');      // comment nodes inside div
 ```
 
 ## Examples
@@ -65,4 +72,4 @@ MIT - see [LICENSE](LICENSE)
 
 ## Credits
 
-Original library by [voku](https://github.com/voku/simple_html_dom).
+Based on [PHP Simple HTML DOM Parser](http://simplehtmldom.sourceforge.net/).

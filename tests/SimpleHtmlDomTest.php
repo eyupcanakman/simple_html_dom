@@ -631,9 +631,6 @@ final class SimpleHtmlDomTest extends \PHPUnit\Framework\TestCase
         static::assertSame('<p class="stock in-stock">30 in stock</p>', $availabilityHtml->innerHtml());
     }
 
-    /**
-     * @see https://github.com/voku/simple_html_dom/issues/114
-     */
     public function testTextExcludesStyleAndScriptContent()
     {
         $html = '<html><head><meta charset="utf-8"><style><!----></style></head><body>foobar</body></html>';
@@ -642,9 +639,6 @@ final class SimpleHtmlDomTest extends \PHPUnit\Framework\TestCase
         static::assertSame('foobar', $body->text());
     }
 
-    /**
-     * @see https://github.com/voku/simple_html_dom/issues/114
-     */
     public function testTextExcludesScriptContent()
     {
         $html = '<div><script>var x = 1;</script>Hello World</div>';
@@ -656,8 +650,6 @@ final class SimpleHtmlDomTest extends \PHPUnit\Framework\TestCase
     /**
      * Verify that delete() on a nested element found via chained findOne()
      * does not crash with a null parentNode error.
-     *
-     * @see https://github.com/voku/simple_html_dom/issues/88
      */
     public function testDeleteNestedElementDoesNotCrash()
     {
@@ -671,9 +663,6 @@ final class SimpleHtmlDomTest extends \PHPUnit\Framework\TestCase
         static::assertSame('', $span->outertext);
     }
 
-    /**
-     * @see https://github.com/voku/simple_html_dom/issues/89
-     */
     public function testOuterhtmlReplacementWithPTagsDoesNotCrash()
     {
         $html = '<div><p>old content</p></div>';
@@ -683,9 +672,6 @@ final class SimpleHtmlDomTest extends \PHPUnit\Framework\TestCase
         static::assertStringContainsString('new content', $document->html());
     }
 
-    /**
-     * @see https://github.com/voku/simple_html_dom/issues/97
-     */
     public function testRemoveMethodWorks()
     {
         $html = '<div><span class="target">remove me</span><span>keep me</span></div>';
@@ -696,9 +682,6 @@ final class SimpleHtmlDomTest extends \PHPUnit\Framework\TestCase
         static::assertStringContainsString('keep me', $document->html());
     }
 
-    /**
-     * @see https://github.com/voku/simple_html_dom/issues/64
-     */
     public function testFindOneOrNullReturnsNullWhenNotFound()
     {
         $html = '<div><span>hello</span></div>';
@@ -707,9 +690,6 @@ final class SimpleHtmlDomTest extends \PHPUnit\Framework\TestCase
         static::assertNull($result);
     }
 
-    /**
-     * @see https://github.com/voku/simple_html_dom/issues/64
-     */
     public function testFindOneOrNullReturnsElementWhenFound()
     {
         $html = '<div><span class="target">hello</span></div>';
@@ -719,9 +699,6 @@ final class SimpleHtmlDomTest extends \PHPUnit\Framework\TestCase
         static::assertSame('hello', $result->text());
     }
 
-    /**
-     * @see https://github.com/voku/simple_html_dom/issues/64
-     */
     public function testFindOneOrNullWorksWithNullsafeOperator()
     {
         $html = '<div><span>hello</span></div>';
