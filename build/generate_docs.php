@@ -7,9 +7,9 @@ $readmeText = (new \voku\PhpReadmeHelper\GenerateApi())->generate(
     __DIR__ . '/../src/',
     __DIR__ . '/docs/api.md',
     [
-        \voku\helper\DomParserInterface::class,
-        \voku\helper\SimpleHtmlDomNodeInterface::class,
-        \voku\helper\SimpleHtmlDomInterface::class
+        \eyupcanakman\SimpleHtmlDom\DomParserInterface::class,
+        \eyupcanakman\SimpleHtmlDom\SimpleHtmlDomNodeInterface::class,
+        \eyupcanakman\SimpleHtmlDom\SimpleHtmlDomInterface::class
     ]
 );
 

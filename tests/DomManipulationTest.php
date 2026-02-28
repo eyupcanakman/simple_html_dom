@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-use voku\helper\HtmlDomParser;
+use eyupcanakman\SimpleHtmlDom\HtmlDomParser;
 
 /**
  * Tests the DOM manipulation ability of the parser

@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-use voku\helper\HtmlDomHelper;
+use eyupcanakman\SimpleHtmlDom\HtmlDomHelper;
 
 /**
  * @internal

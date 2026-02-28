@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace voku\helper;
+namespace eyupcanakman\SimpleHtmlDom;
 
 use Symfony\Component\CssSelector\CssSelectorConverter;
 

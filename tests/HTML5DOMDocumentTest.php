@@ -7,7 +7,7 @@
  * Free to use under the MIT license.
  */
 
-use voku\helper\HtmlDomParser;
+use eyupcanakman\SimpleHtmlDom\HtmlDomParser;
 
 /**
  * @runTestsInSeparateProcesses

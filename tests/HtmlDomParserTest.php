@@ -1,10 +1,10 @@
 <?php
 
-use voku\helper\HtmlDomParser;
-use voku\helper\SimpleHtmlDom;
-use voku\helper\SimpleHtmlDomInterface;
-use voku\helper\SimpleHtmlDomNode;
-use voku\helper\SimpleHtmlDomNodeInterface;
+use eyupcanakman\SimpleHtmlDom\HtmlDomParser;
+use eyupcanakman\SimpleHtmlDom\SimpleHtmlDom;
+use eyupcanakman\SimpleHtmlDom\SimpleHtmlDomInterface;
+use eyupcanakman\SimpleHtmlDom\SimpleHtmlDomNode;
+use eyupcanakman\SimpleHtmlDom\SimpleHtmlDomNodeInterface;
 
 /**
  * @internal
@@ -133,7 +133,7 @@ final class HtmlDomParserTest extends \PHPUnit\Framework\TestCase
     public function testHrefReplacing()
     {
         $origUrl = 'https://test.com?param1=1&param2=2';
-        $document = \voku\helper\HtmlDomParser::str_get_html("<a href='" . $origUrl . "'></a>");
+        $document = \eyupcanakman\SimpleHtmlDom\HtmlDomParser::str_get_html("<a href='" . $origUrl . "'></a>");
         $link = $document->findOne('a');
         $link->setAttribute('href', 'https://redirect.com?rdr=' . \urlencode($link->getAttribute('href')));
 
@@ -172,7 +172,7 @@ final class HtmlDomParserTest extends \PHPUnit\Framework\TestCase
         // ---
 
         // this only works with "UTF8"-helpers
-        if (\class_exists('\voku\helper\UTF8')) {
+        if (\class_exists('\eyupcanakman\SimpleHtmlDom\UTF8')) {
             static::assertSame(['ÅÄÖ', 'åäö'], $document->find('li')->text());
         }
     }
@@ -225,16 +225,16 @@ final class HtmlDomParserTest extends \PHPUnit\Framework\TestCase
         $document = new HtmlDomParser($html);
         $elements = $document->find($selector);
 
-        static::assertInstanceOf(voku\helper\SimpleHtmlDomNodeInterface::class, $elements);
+        static::assertInstanceOf(eyupcanakman\SimpleHtmlDom\SimpleHtmlDomNodeInterface::class, $elements);
         static::assertCount($count, $elements);
 
         foreach ($elements as $element) {
-            static::assertInstanceOf(voku\helper\SimpleHtmlDomInterface::class, $element);
+            static::assertInstanceOf(eyupcanakman\SimpleHtmlDom\SimpleHtmlDomInterface::class, $element);
         }
 
         if ($count !== 0) {
             $element = $document->find($selector, -1);
-            static::assertInstanceOf(voku\helper\SimpleHtmlDomInterface::class, $element);
+            static::assertInstanceOf(eyupcanakman\SimpleHtmlDom\SimpleHtmlDomInterface::class, $element);
         }
     }
 
@@ -359,7 +359,7 @@ final class HtmlDomParserTest extends \PHPUnit\Framework\TestCase
         </body>
         </html>';
 
-        $dom = new voku\helper\HtmlDomParser();
+        $dom = new eyupcanakman\SimpleHtmlDom\HtmlDomParser();
         $dom->load($html);
 
         foreach ($dom->findMulti('.mydiv .mydiv-item') as $childEl) {
@@ -726,7 +726,7 @@ test3Html.html                      <foo id="foo">bar</foo>
 HTML;
 
         $htmlTmp = HtmlDomParser::str_get_html($str);
-        static::assertInstanceOf(voku\helper\HtmlDomParser::class, $htmlTmp);
+        static::assertInstanceOf(eyupcanakman\SimpleHtmlDom\HtmlDomParser::class, $htmlTmp);
 
         // replace all images with "foobar"
         $tmpArray = [];
@@ -891,8 +891,8 @@ HTML;
             return $html;
         }
 
-        $dom = \voku\helper\HtmlDomParser::str_get_html($html);
-        $domNew = \voku\helper\HtmlDomParser::str_get_html('<textarea ' . $optionStr . '></textarea>');
+        $dom = \eyupcanakman\SimpleHtmlDom\HtmlDomParser::str_get_html($html);
+        $domNew = \eyupcanakman\SimpleHtmlDom\HtmlDomParser::str_get_html('<textarea ' . $optionStr . '></textarea>');
 
         $domElement = $dom->findOneOrFalse($htmlCssSelector);
         if ($domElement === false) {
@@ -957,12 +957,12 @@ HTML;
 
         $html = new HtmlDomParser();
         $html->setCallbackBeforeCreateDom(
-            static function (string $str, \voku\helper\HtmlDomParser $htmlParser) {
+            static function (string $str, \eyupcanakman\SimpleHtmlDom\HtmlDomParser $htmlParser) {
                 return \str_replace('ノ', '?', $str);
             }
         );
         $html->setCallbackXPathBeforeQuery(
-            static function (string $cssSelectorString, string $xPathString, \DOMXPath $xPath, \voku\helper\HtmlDomParser $htmlParser) {
+            static function (string $cssSelectorString, string $xPathString, \DOMXPath $xPath, \eyupcanakman\SimpleHtmlDom\HtmlDomParser $htmlParser) {
                 return $cssSelectorString === 'xxx' ? '//p' : $xPathString;
             }
         );
@@ -2241,7 +2241,7 @@ ___;
 
         // ---
 
-        $d = new voku\helper\HtmlDomParser();
+        $d = new eyupcanakman\SimpleHtmlDom\HtmlDomParser();
         $d->overwriteTemplateLogicSyntaxInSpecialScriptTags(['{#']);
         $d->loadHtml($html);
 
@@ -2272,7 +2272,7 @@ ___;
 
         // ---
 
-        $d = new voku\helper\HtmlDomParser();
+        $d = new eyupcanakman\SimpleHtmlDom\HtmlDomParser();
         $d->overwriteTemplateLogicSyntaxInSpecialScriptTags(['{%']);
         $d->loadHtml($html);
 
@@ -2306,7 +2306,7 @@ ___;
     {
         static::expectException(InvalidArgumentException::class);
 
-        $d = new voku\helper\HtmlDomParser();
+        $d = new eyupcanakman\SimpleHtmlDom\HtmlDomParser();
         $d->overwriteTemplateLogicSyntaxInSpecialScriptTags([['{{']]);
     }
 
@@ -2325,7 +2325,7 @@ ___;
 
     public function testIssue42()
     {
-        $d = new voku\helper\HtmlDomParser();
+        $d = new eyupcanakman\SimpleHtmlDom\HtmlDomParser();
 
         $d->loadHtml('<p>p1</p><p>p2</p>');
         static::assertSame('<p>p1</p><p>p2</p>', (string) $d);
@@ -2336,7 +2336,7 @@ ___;
 
     public function testIssue53()
     {
-        $d = new voku\helper\HtmlDomParser();
+        $d = new eyupcanakman\SimpleHtmlDom\HtmlDomParser();
 
         $html = '
         <blockquote class="bg-gray primary">
@@ -2406,7 +2406,7 @@ ___;
         </div>
         </html>';
 
-        $domTree = \voku\helper\HtmlDomParser::str_get_html($html);
+        $domTree = \eyupcanakman\SimpleHtmlDom\HtmlDomParser::str_get_html($html);
 
         static::assertSame($expected, $domTree->html());
 
@@ -2459,7 +2459,7 @@ ___;
         </div>
         </html>';
 
-        $domTree = \voku\helper\HtmlDomParser::str_get_html($html);
+        $domTree = \eyupcanakman\SimpleHtmlDom\HtmlDomParser::str_get_html($html);
 
         static::assertSame($expected, $domTree->html());
 
@@ -2586,7 +2586,7 @@ ___;
         <div class='services active'></div>
         ";
 
-        $d = new voku\helper\HtmlDomParser();
+        $d = new eyupcanakman\SimpleHtmlDom\HtmlDomParser();
         $d->load($html);
 
         $htmlResult = '';
@@ -2601,7 +2601,7 @@ ___;
 
         // ---
 
-        $d = new voku\helper\HtmlDomParser();
+        $d = new eyupcanakman\SimpleHtmlDom\HtmlDomParser();
         $d->load($html);
 
         $htmlResult = '';

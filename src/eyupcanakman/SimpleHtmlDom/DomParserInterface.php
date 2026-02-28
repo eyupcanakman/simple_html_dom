@@ -1,6 +1,6 @@
 <?php
 
-namespace voku\helper;
+namespace eyupcanakman\SimpleHtmlDom;
 
 interface DomParserInterface
 {

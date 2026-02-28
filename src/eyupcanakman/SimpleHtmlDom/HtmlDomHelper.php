@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace voku\helper;
+namespace eyupcanakman\SimpleHtmlDom;
 
 final class HtmlDomHelper
 {
@@ -22,8 +22,8 @@ final class HtmlDomHelper
             return $html;
         }
 
-        $dom = \voku\helper\HtmlDomParser::str_get_html($html);
-        $domNew = \voku\helper\HtmlDomParser::str_get_html('<textarea ' . $optionStr . '></textarea>');
+        $dom = \eyupcanakman\SimpleHtmlDom\HtmlDomParser::str_get_html($html);
+        $domNew = \eyupcanakman\SimpleHtmlDom\HtmlDomParser::str_get_html('<textarea ' . $optionStr . '></textarea>');
 
         $domElement = $dom->findOneOrFalse($htmlCssSelector);
         if ($domElement === false) {

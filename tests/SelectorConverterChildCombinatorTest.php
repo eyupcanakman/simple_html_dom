@@ -1,8 +1,8 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use voku\helper\HtmlDomParser;
-use voku\helper\SelectorConverter;
+use eyupcanakman\SimpleHtmlDom\HtmlDomParser;
+use eyupcanakman\SimpleHtmlDom\SelectorConverter;
 
 /**
  * @internal

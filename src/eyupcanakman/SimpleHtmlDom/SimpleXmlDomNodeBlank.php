@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace voku\helper;
+namespace eyupcanakman\SimpleHtmlDom;
 
 /**
  * {@inheritdoc}
  */
-class SimpleHtmlDomNodeBlank extends AbstractSimpleHtmlDomNode implements SimpleHtmlDomNodeInterface
+class SimpleXmlDomNodeBlank extends AbstractSimpleXmlDomNode implements SimpleXmlDomNodeInterface
 {
     /**
      * @param string   $selector
@@ -21,19 +21,19 @@ class SimpleHtmlDomNodeBlank extends AbstractSimpleHtmlDomNode implements Simple
     }
 
     /**
-     * Find nodes with a CSS selector.
+     * Find nodes with a CSS or xPath selector.
      *
      * @param string $selector
      *
-     * @return SimpleHtmlDomInterface[]|SimpleHtmlDomNodeInterface<SimpleHtmlDomInterface>
+     * @return SimpleXmlDomInterface[]|SimpleXmlDomNodeInterface<SimpleXmlDomInterface>
      */
-    public function findMulti(string $selector): SimpleHtmlDomNodeInterface
+    public function findMulti(string $selector): SimpleXmlDomNodeInterface
     {
         return new self();
     }
 
     /**
-     * Find nodes with a CSS selector.
+     * Find nodes with a CSS or xPath selector.
      *
      * @param string $selector
      *
@@ -45,20 +45,18 @@ class SimpleHtmlDomNodeBlank extends AbstractSimpleHtmlDomNode implements Simple
     }
 
     /**
-     * Find one node with a CSS selector.
+     * Find one node with a CSS or xPath selector.
      *
      * @param string $selector
      *
-     * @return SimpleHtmlDomInterface
+     * @return SimpleXmlDomInterface
      */
     public function findOne(string $selector)
     {
-        return new SimpleHtmlDomBlank();
+        return new SimpleXmlDomBlank();
     }
 
     /**
-     * Find one node with a CSS selector or false, if no element is found.
-     *
      * @param string $selector
      *
      * @return false
@@ -69,8 +67,6 @@ class SimpleHtmlDomNodeBlank extends AbstractSimpleHtmlDomNode implements Simple
     }
 
     /**
-     * Find one node with a CSS selector or null, if no element is found.
-     *
      * @param string $selector
      *
      * @return null

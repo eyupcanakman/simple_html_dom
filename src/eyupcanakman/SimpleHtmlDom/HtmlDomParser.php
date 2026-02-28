@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace voku\helper;
+namespace eyupcanakman\SimpleHtmlDom;
 
 /**
  * @property-read string $outerText
@@ -36,14 +36,14 @@ class HtmlDomParser extends AbstractDomParser
     /**
      * @var callable|null
      *
-     * @phpstan-var null|callable(string $cssSelectorString, string $xPathString, \DOMXPath, \voku\helper\HtmlDomParser): string
+     * @phpstan-var null|callable(string $cssSelectorString, string $xPathString, \DOMXPath, \eyupcanakman\SimpleHtmlDom\HtmlDomParser): string
      */
     private $callbackXPathBeforeQuery;
 
     /**
      * @var callable|null
      *
-     * @phpstan-var null|callable(string $htmlString, \voku\helper\HtmlDomParser): string
+     * @phpstan-var null|callable(string $htmlString, \eyupcanakman\SimpleHtmlDom\HtmlDomParser): string
      */
     private $callbackBeforeCreateDom;
 
@@ -915,8 +915,8 @@ class HtmlDomParser extends AbstractDomParser
         }
 
         try {
-            if (\class_exists('\voku\helper\UTF8')) {
-                $html = \voku\helper\UTF8::file_get_contents($filePath);
+            if (\class_exists('\eyupcanakman\SimpleHtmlDom\UTF8')) {
+                $html = \eyupcanakman\SimpleHtmlDom\UTF8::file_get_contents($filePath);
             } else {
                 $html = \file_get_contents($filePath);
             }
@@ -1219,7 +1219,7 @@ class HtmlDomParser extends AbstractDomParser
     /**
      * @param callable $callbackXPathBeforeQuery
      *
-     * @phpstan-param callable(string $cssSelectorString, string $xPathString,\DOMXPath,\voku\helper\HtmlDomParser): string $callbackXPathBeforeQuery
+     * @phpstan-param callable(string $cssSelectorString, string $xPathString,\DOMXPath,\eyupcanakman\SimpleHtmlDom\HtmlDomParser): string $callbackXPathBeforeQuery
      *
      * @return $this
      */
@@ -1233,7 +1233,7 @@ class HtmlDomParser extends AbstractDomParser
     /**
      * @param callable $callbackBeforeCreateDom
      *
-     * @phpstan-param callable(string $htmlString, \voku\helper\HtmlDomParser): string $callbackBeforeCreateDom
+     * @phpstan-param callable(string $htmlString, \eyupcanakman\SimpleHtmlDom\HtmlDomParser): string $callbackBeforeCreateDom
      *
      * @return $this
      */

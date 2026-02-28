@@ -34,7 +34,7 @@
     },
     "autoload": {
         "psr-4": {
-            "voku\\helper\\": "src/voku/helper/"
+            "eyupcanakman\\SimpleHtmlDom\\": "src/eyupcanakman/SimpleHtmlDom/"
         }
     },
     "autoload-dev": {
