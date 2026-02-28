@@ -1,6 +1,6 @@
 {
     "name": "eyupcanakman/simple-html-dom",
-    "description": "Simple HTML DOM package.",
+    "description": "A modern HTML DOM parser for PHP using DOMDocument and Symfony CssSelector.",
     "keywords": [
         "dom",
         "php dom",
@@ -11,15 +11,21 @@
     "type": "library",
     "authors": [
         {
-            "name": "dimabdc",
-            "email": "support@titor.ru",
-            "homepage": "https://github.com/dimabdc",
-            "role": "Developer"
+            "name": "Eyüp Can Akman",
+            "email": "eyupcanakman@gmail.com",
+            "homepage": "https://github.com/eyupcanakman",
+            "role": "Maintainer"
         },
         {
             "name": "Lars Moelleken",
             "homepage": "https://www.moelleken.org/",
-            "role": "Fork-Maintainer"
+            "role": "Original Author"
+        },
+        {
+            "name": "dimabdc",
+            "email": "support@titor.ru",
+            "homepage": "https://github.com/dimabdc",
+            "role": "Original Author"
         }
     ],
     "require": {
