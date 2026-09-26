@@ -145,6 +145,11 @@ class HtmlDomParser extends AbstractDomParser
     /**
      * @var bool
      */
+    protected $isDOMDocumentCreatedWithHelperWrapper = false;
+
+    /**
+     * @var bool
+     */
     protected $isDOMDocumentCreatedWithoutBodyWrapper = false;
 
     /**
@@ -465,6 +470,7 @@ class HtmlDomParser extends AbstractDomParser
             )
         ) {
             $html = '<' . self::$domHtmlWrapperHelper . '>' . $html . '</' . self::$domHtmlWrapperHelper . '>';
+            $this->isDOMDocumentCreatedWithHelperWrapper = true;
         }
 
         $html = self::replaceToPreserveHtmlEntities($html);
@@ -698,7 +704,10 @@ class HtmlDomParser extends AbstractDomParser
             );
         }
 
-        if ($this->getIsDOMDocumentCreatedWithoutPTagWrapper()) {
+        // libxml wraps text that has no element around it in <p>. Inside the
+        // helper wrapper it never does, so any <p> there came from the input
+        // or from a later edit, and stays.
+        if ($this->getIsDOMDocumentCreatedWithoutPTagWrapper() && !$this->isDOMDocumentCreatedWithHelperWrapper) {
             $content = \str_replace(
                 [
                     '<p>',

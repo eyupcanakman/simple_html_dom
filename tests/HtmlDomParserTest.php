@@ -1656,6 +1656,14 @@ ___;
         );
     }
 
+    public function testParagraphsAddedToADocumentWithoutAnyAreKept()
+    {
+        $dom = HtmlDomParser::str_get_html('<blockquote>q1</blockquote><blockquote>q2</blockquote>');
+        $dom->findOne('blockquote')->innertext = '<p>q1</p><p>q2</p>';
+
+        static::assertSame('<blockquote><p>q1</p><p>q2</p></blockquote><blockquote>q2</blockquote>', $dom->html());
+    }
+
     public function testTextBeforeParagraphsKeepsTheirClosingTags()
     {
         foreach ([
