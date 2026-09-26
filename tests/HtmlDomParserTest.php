@@ -16,7 +16,7 @@ final class HtmlDomParserTest extends \PHPUnit\Framework\TestCase
      *
      * @return string|null
      */
-    protected function loadFixture($filename)
+    protected static function loadFixture($filename)
     {
         $path = __DIR__ . '/fixtures/' . $filename;
         if (\file_exists($path)) {
@@ -194,7 +194,7 @@ final class HtmlDomParserTest extends \PHPUnit\Framework\TestCase
 
     public function testLoadHtml()
     {
-        $html = $this->loadFixture('test_page.html');
+        $html = static::loadFixture('test_page.html');
         $document = new HtmlDomParser();
 
         $document->loadHtml($html);
@@ -241,9 +241,9 @@ final class HtmlDomParserTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
-    public function findTests()
+    public static function findTests()
     {
-        $html = $this->loadFixture('test_page.html');
+        $html = static::loadFixture('test_page.html');
 
         return [
             [$html, '.fake h2', 0],
@@ -263,7 +263,7 @@ final class HtmlDomParserTest extends \PHPUnit\Framework\TestCase
 
     public function testHtml()
     {
-        $html = $this->loadFixture('test_page.html');
+        $html = static::loadFixture('test_page.html');
         $document = new HtmlDomParser($html);
 
         $htmlTmp = $document->html();
@@ -320,7 +320,7 @@ final class HtmlDomParserTest extends \PHPUnit\Framework\TestCase
 
     public function testSave()
     {
-        $html = $this->loadFixture('test_page.html');
+        $html = static::loadFixture('test_page.html');
         $document = new HtmlDomParser($html);
 
         if (\method_exists(__CLASS__, 'assertIsString')) {
@@ -1273,7 +1273,7 @@ HTML;
 
         $html = \str_replace(["\r\n", "\r", "\n"], "\n", $dom->html());
 
-        $expected = $this->loadFixture('issue81_v2.html');
+        $expected = static::loadFixture('issue81_v2.html');
         $expected = \str_replace(["\r\n", "\r", "\n"], "\n", $expected);
 
         static::assertSame($expected, $html);
@@ -1656,6 +1656,20 @@ ___;
         );
     }
 
+    public function testTextBeforeParagraphsKeepsTheirClosingTags()
+    {
+        foreach ([
+            'Intro<p>One.</p><p>Two.</p>' => 'Intro<p>One.</p><p>Two.</p>',
+            "Intro\n<p>One.</p>\n<p>Two.</p>" => "Intro\n<p>One.</p>\n<p>Two.</p>",
+            'Intro<ul><li>a</li></ul><p>b</p>' => 'Intro<ul><li>a</li></ul><p>b</p>',
+            'Plain text only' => 'Plain text only',
+        ] as $input => $expected) {
+            $dom = HtmlDomParser::str_get_html($input);
+            static::assertSame($expected, $dom->html(), 'tested: ' . $input);
+            static::assertSame($expected, HtmlDomParser::str_get_html($dom->html())->html(), 'round trip: ' . $input);
+        }
+    }
+
     public function testUtf8AndBrokenHtmlEncoding()
     {
         $dom = new HtmlDomParser();
@@ -1679,7 +1693,7 @@ ___;
         $dom = new HtmlDomParser();
         $dom->load('hi</b><p>سلام<div>の家庭に、9 ☆<><');
         static::assertSame(
-            'hi<p>سلام<div>の家庭に、9 ☆</div>',
+            'hi<p>سلام</p><div>の家庭に、9 ☆</div>',
             $dom->innerHtml
         );
     }

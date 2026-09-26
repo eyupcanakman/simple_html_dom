@@ -13,7 +13,7 @@ final class SimpleHtmlDomTest extends \PHPUnit\Framework\TestCase
      *
      * @return string|null
      */
-    protected function loadFixture($filename)
+    protected static function loadFixture($filename)
     {
         $path = __DIR__ . '/fixtures/' . $filename;
         if (\file_exists($path)) {
@@ -196,7 +196,7 @@ final class SimpleHtmlDomTest extends \PHPUnit\Framework\TestCase
         static::assertSame('', $document->plaintext);
     }
 
-    public function replaceNodeDataProvider()
+    public static function replaceNodeDataProvider()
     {
         return [
             [
@@ -289,9 +289,9 @@ final class SimpleHtmlDomTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
-    public function findTests()
+    public static function findTests()
     {
-        $html = $this->loadFixture('test_page.html');
+        $html = static::loadFixture('test_page.html');
 
         return [
             [$html, '.fake h2', 0],
@@ -311,7 +311,7 @@ final class SimpleHtmlDomTest extends \PHPUnit\Framework\TestCase
 
     public function testGetElementById()
     {
-        $html = $this->loadFixture('test_page.html');
+        $html = static::loadFixture('test_page.html');
 
         $document = new HtmlDomParser($html);
         $element = new SimpleHtmlDom($document->getDocument()->documentElement);
@@ -327,7 +327,7 @@ final class SimpleHtmlDomTest extends \PHPUnit\Framework\TestCase
 
     public function testGetElementByTagName()
     {
-        $html = $this->loadFixture('test_page.html');
+        $html = static::loadFixture('test_page.html');
 
         $document = new HtmlDomParser($html);
         $element = new SimpleHtmlDom($document->getDocument()->documentElement);
@@ -342,7 +342,7 @@ final class SimpleHtmlDomTest extends \PHPUnit\Framework\TestCase
 
     public function testGetElementsByTagName()
     {
-        $html = $this->loadFixture('test_page.html');
+        $html = static::loadFixture('test_page.html');
 
         $document = new HtmlDomParser($html);
         $element = new SimpleHtmlDom($document->getDocument()->documentElement);

@@ -12,7 +12,7 @@ final class SimpleHtmlDomNodeTest extends \PHPUnit\Framework\TestCase
      *
      * @return string|null
      */
-    protected function loadFixture($filename)
+    protected static function loadFixture($filename)
     {
         $path = __DIR__ . '/fixtures/' . $filename;
         if (\file_exists($path)) {
@@ -47,9 +47,9 @@ final class SimpleHtmlDomNodeTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
-    public function findTests(): array
+    public static function findTests(): array
     {
-        $html = $this->loadFixture('test_page.html');
+        $html = static::loadFixture('test_page.html');
 
         return [
             [$html, '.fake h2', 0],

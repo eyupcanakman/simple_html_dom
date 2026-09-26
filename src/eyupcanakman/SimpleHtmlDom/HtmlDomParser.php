@@ -698,11 +698,6 @@ class HtmlDomParser extends AbstractDomParser
             );
         }
 
-        if ($this->getIsDOMDocumentCreatedWithoutWrapper()) {
-            $content = (string) \preg_replace('/^<p>/', '', $content);
-            $content = (string) \preg_replace('/<\/p>/', '', $content);
-        }
-
         if ($this->getIsDOMDocumentCreatedWithoutPTagWrapper()) {
             $content = \str_replace(
                 [

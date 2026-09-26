@@ -34,7 +34,7 @@ final class CommentTest extends TestCase
         static::assertSame($doc, $this->html->save());
     }
 
-    public function dataProvider_for_comment_should_parse()
+    public static function dataProvider_for_comment_should_parse()
     {
         return [
             'empty' => [
